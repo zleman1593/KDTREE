@@ -1,0 +1,270 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A2D51CE91ADAB84400BDD46B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2D51CE81ADAB84400BDD46B /* GLUT.framework */; };
+		A2D51CEB1ADAB84A00BDD46B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2D51CEA1ADAB84A00BDD46B /* OpenGL.framework */; };
+		A2D51CEE1ADAB89A00BDD46B /* kdtree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2D51CEC1ADAB89A00BDD46B /* kdtree.cpp */; };
+		A2D51CF31ADAB8CC00BDD46B /* rtimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2D51CF01ADAB8CC00BDD46B /* rtimer.cpp */; };
+		A2D51CF41ADAB8CC00BDD46B /* viewPoints.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2D51CF21ADAB8CC00BDD46B /* viewPoints.cpp */; };
+		A2D51CF71ADAB8DB00BDD46B /* geom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2D51CF51ADAB8DB00BDD46B /* geom.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A2D51CDC1ADAB80B00BDD46B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A2D51CDE1ADAB80B00BDD46B /* KDTREE */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KDTREE; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2D51CE81ADAB84400BDD46B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		A2D51CEA1ADAB84A00BDD46B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		A2D51CEC1ADAB89A00BDD46B /* kdtree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = kdtree.cpp; sourceTree = "<group>"; };
+		A2D51CED1ADAB89A00BDD46B /* kdtree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kdtree.h; sourceTree = "<group>"; };
+		A2D51CEF1ADAB8CC00BDD46B /* Makefile.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.txt; sourceTree = "<group>"; };
+		A2D51CF01ADAB8CC00BDD46B /* rtimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtimer.cpp; sourceTree = "<group>"; };
+		A2D51CF11ADAB8CC00BDD46B /* rtimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtimer.h; sourceTree = "<group>"; };
+		A2D51CF21ADAB8CC00BDD46B /* viewPoints.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = viewPoints.cpp; sourceTree = "<group>"; };
+		A2D51CF51ADAB8DB00BDD46B /* geom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = geom.cpp; sourceTree = "<group>"; };
+		A2D51CF61ADAB8DB00BDD46B /* geom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = geom.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A2D51CDB1ADAB80B00BDD46B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2D51CEB1ADAB84A00BDD46B /* OpenGL.framework in Frameworks */,
+				A2D51CE91ADAB84400BDD46B /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A2D51CD51ADAB80B00BDD46B = {
+			isa = PBXGroup;
+			children = (
+				A2D51CEA1ADAB84A00BDD46B /* OpenGL.framework */,
+				A2D51CE81ADAB84400BDD46B /* GLUT.framework */,
+				A2D51CE01ADAB80B00BDD46B /* KDTREE */,
+				A2D51CDF1ADAB80B00BDD46B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A2D51CDF1ADAB80B00BDD46B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A2D51CDE1ADAB80B00BDD46B /* KDTREE */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A2D51CE01ADAB80B00BDD46B /* KDTREE */ = {
+			isa = PBXGroup;
+			children = (
+				A2D51CEC1ADAB89A00BDD46B /* kdtree.cpp */,
+				A2D51CF51ADAB8DB00BDD46B /* geom.cpp */,
+				A2D51CF61ADAB8DB00BDD46B /* geom.h */,
+				A2D51CED1ADAB89A00BDD46B /* kdtree.h */,
+				A2D51CEF1ADAB8CC00BDD46B /* Makefile.txt */,
+				A2D51CF01ADAB8CC00BDD46B /* rtimer.cpp */,
+				A2D51CF11ADAB8CC00BDD46B /* rtimer.h */,
+				A2D51CF21ADAB8CC00BDD46B /* viewPoints.cpp */,
+			);
+			path = KDTREE;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A2D51CDD1ADAB80B00BDD46B /* KDTREE */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A2D51CE51ADAB80B00BDD46B /* Build configuration list for PBXNativeTarget "KDTREE" */;
+			buildPhases = (
+				A2D51CDA1ADAB80B00BDD46B /* Sources */,
+				A2D51CDB1ADAB80B00BDD46B /* Frameworks */,
+				A2D51CDC1ADAB80B00BDD46B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KDTREE;
+			productName = KDTREE;
+			productReference = A2D51CDE1ADAB80B00BDD46B /* KDTREE */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A2D51CD61ADAB80B00BDD46B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = Zleman.Xing;
+				TargetAttributes = {
+					A2D51CDD1ADAB80B00BDD46B = {
+						CreatedOnToolsVersion = 6.3;
+					};
+				};
+			};
+			buildConfigurationList = A2D51CD91ADAB80B00BDD46B /* Build configuration list for PBXProject "KDTREE" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A2D51CD51ADAB80B00BDD46B;
+			productRefGroup = A2D51CDF1ADAB80B00BDD46B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A2D51CDD1ADAB80B00BDD46B /* KDTREE */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A2D51CDA1ADAB80B00BDD46B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2D51CF71ADAB8DB00BDD46B /* geom.cpp in Sources */,
+				A2D51CEE1ADAB89A00BDD46B /* kdtree.cpp in Sources */,
+				A2D51CF41ADAB8CC00BDD46B /* viewPoints.cpp in Sources */,
+				A2D51CF31ADAB8CC00BDD46B /* rtimer.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A2D51CE31ADAB80B00BDD46B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A2D51CE41ADAB80B00BDD46B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A2D51CE61ADAB80B00BDD46B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A2D51CE71ADAB80B00BDD46B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A2D51CD91ADAB80B00BDD46B /* Build configuration list for PBXProject "KDTREE" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2D51CE31ADAB80B00BDD46B /* Debug */,
+				A2D51CE41ADAB80B00BDD46B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A2D51CE51ADAB80B00BDD46B /* Build configuration list for PBXNativeTarget "KDTREE" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2D51CE61ADAB80B00BDD46B /* Debug */,
+				A2D51CE71ADAB80B00BDD46B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A2D51CD61ADAB80B00BDD46B /* Project object */;
+}

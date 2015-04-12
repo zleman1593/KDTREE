@@ -10,9 +10,9 @@
 		A2D51CE91ADAB84400BDD46B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2D51CE81ADAB84400BDD46B /* GLUT.framework */; };
 		A2D51CEB1ADAB84A00BDD46B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2D51CEA1ADAB84A00BDD46B /* OpenGL.framework */; };
 		A2D51CEE1ADAB89A00BDD46B /* kdtree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2D51CEC1ADAB89A00BDD46B /* kdtree.cpp */; };
-		A2D51CF31ADAB8CC00BDD46B /* rtimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2D51CF01ADAB8CC00BDD46B /* rtimer.cpp */; };
 		A2D51CF41ADAB8CC00BDD46B /* viewPoints.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2D51CF21ADAB8CC00BDD46B /* viewPoints.cpp */; };
 		A2D51CF71ADAB8DB00BDD46B /* geom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2D51CF51ADAB8DB00BDD46B /* geom.cpp */; };
+		A2E0197C1ADAD06E00727DFD /* rtimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2E0197A1ADAD06E00727DFD /* rtimer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,11 +34,11 @@
 		A2D51CEC1ADAB89A00BDD46B /* kdtree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = kdtree.cpp; sourceTree = "<group>"; };
 		A2D51CED1ADAB89A00BDD46B /* kdtree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kdtree.h; sourceTree = "<group>"; };
 		A2D51CEF1ADAB8CC00BDD46B /* Makefile.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.txt; sourceTree = "<group>"; };
-		A2D51CF01ADAB8CC00BDD46B /* rtimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtimer.cpp; sourceTree = "<group>"; };
-		A2D51CF11ADAB8CC00BDD46B /* rtimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtimer.h; sourceTree = "<group>"; };
 		A2D51CF21ADAB8CC00BDD46B /* viewPoints.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = viewPoints.cpp; sourceTree = "<group>"; };
 		A2D51CF51ADAB8DB00BDD46B /* geom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = geom.cpp; sourceTree = "<group>"; };
 		A2D51CF61ADAB8DB00BDD46B /* geom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = geom.h; sourceTree = "<group>"; };
+		A2E0197A1ADAD06E00727DFD /* rtimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtimer.cpp; sourceTree = "<group>"; };
+		A2E0197B1ADAD06E00727DFD /* rtimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtimer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,9 +80,9 @@
 				A2D51CF61ADAB8DB00BDD46B /* geom.h */,
 				A2D51CED1ADAB89A00BDD46B /* kdtree.h */,
 				A2D51CEF1ADAB8CC00BDD46B /* Makefile.txt */,
-				A2D51CF01ADAB8CC00BDD46B /* rtimer.cpp */,
-				A2D51CF11ADAB8CC00BDD46B /* rtimer.h */,
 				A2D51CF21ADAB8CC00BDD46B /* viewPoints.cpp */,
+				A2E0197A1ADAD06E00727DFD /* rtimer.cpp */,
+				A2E0197B1ADAD06E00727DFD /* rtimer.h */,
 			);
 			path = KDTREE;
 			sourceTree = "<group>";
@@ -143,10 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2E0197C1ADAD06E00727DFD /* rtimer.cpp in Sources */,
 				A2D51CF71ADAB8DB00BDD46B /* geom.cpp in Sources */,
 				A2D51CEE1ADAB89A00BDD46B /* kdtree.cpp in Sources */,
 				A2D51CF41ADAB8CC00BDD46B /* viewPoints.cpp in Sources */,
-				A2D51CF31ADAB8CC00BDD46B /* rtimer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +263,7 @@
 				A2D51CE71ADAB80B00BDD46B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

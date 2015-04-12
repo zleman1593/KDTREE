@@ -70,7 +70,6 @@ void initialize_points_random() {
     
     for (int i=0; i<n; i++) {
         point2D point = point2D();
-        
         point.x = (int)(.1*WINDOWSIZE)/2 + rand() % ((int)(.9*WINDOWSIZE));
         point.y =  (int)(.1*WINDOWSIZE)/2 + rand() % ((int)(.9*WINDOWSIZE));
         points.push_back(point);
@@ -105,7 +104,7 @@ void reset() {
     
     Rtimer rt1;
     rt_start(rt1);
-//    tree = kdtree_build(points, n);
+    tree = kdtree_build(points, n);
     rt_stop(rt1);
     char buf [1024];
     rt_sprint(buf,rt1);
@@ -113,7 +112,7 @@ void reset() {
     fflush(stdout);
     
     // print the tree
-//    kdtree_print(tree);
+   kdtree_print(tree);
 }
 
 
@@ -128,7 +127,7 @@ int main(int argc, char * argv[]) {
     
     n = atoi(argv[1]);
     printf("you entered n=%d\n", n);
-    assert(n >0);
+    assert(n > 0);
     
     srand(time(NULL));
     //initialize the points and build kdtree

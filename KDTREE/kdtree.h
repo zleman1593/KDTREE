@@ -9,6 +9,7 @@
 
 #include "geom.h"
 #include <stddef.h> //for size_t
+#include <vector>
 
 
 typedef struct _treeNode treeNode;
@@ -50,7 +51,7 @@ point2D treeNode_getPoint(treeNode *node);
 kdtree* kdtree_init();
 
 /* create a new tree representing the given array of points */
-kdtree* kdtree_build(point2D *points, int n);
+kdtree* kdtree_build(std::vector<point2D> points, int n);
 
 /* free all memory allocated for the tree, including the tree
    itself */

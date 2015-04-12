@@ -107,7 +107,7 @@ void kdtree_free(kdtree *tree) {
 
 
 /* create a new tree representing the given array of points */
-kdtree* kdtree_build(point2D *points, int n) {
+kdtree* kdtree_build(std::vector<point2D> points, int n) {
 
   //fill in
 

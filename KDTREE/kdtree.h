@@ -14,7 +14,17 @@
 
 typedef struct _treeNode treeNode;
 
+typedef struct _bounds {
+    int x_upper;
+    int x_lower;
+    int y_upper;
+    int y_lower;
+} bounds;
+
 struct _treeNode {
+    
+ bounds  nodeBounds;//Bounds fare used to draw the line for a nonleaf node
+    
   point2D p; /* If this is a leaf node, p represents the point
 		stored in this leaf.  If this is not a leaf node, p
 		represents the horizontal or vertical line stored in
@@ -41,6 +51,7 @@ typedef struct _kdtree {
 
 
 
+
 /* returns the root node of the given tree */
 treeNode* kdtree_getRoot(kdtree *tree);
 
@@ -51,7 +62,7 @@ point2D treeNode_getPoint(treeNode *node);
 kdtree* kdtree_init();
 
 /* create a new tree representing the given array of points */
-kdtree* kdtree_build(std::vector<point2D> points, int n);
+kdtree* kdtree_build(std::vector<point2D> points);
 
 /* free all memory allocated for the tree, including the tree
    itself */
@@ -61,5 +72,6 @@ void kdtree_free(kdtree *tree);
  nodes, and each node in an in-order traversal */
 void kdtree_print(kdtree *tree);
 
+kdtree* kdtree_build(std::vector<point2D> points);
 
 #endif

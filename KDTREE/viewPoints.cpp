@@ -20,8 +20,9 @@
 #include <stdio.h>
 #include <math.h>
 #include <assert.h>
-
-
+#include <map>
+#include <string>
+#include <sstream>
 #include <GLUT/glut.h>
 
 #include <OpenGL/OpenGL.h>
@@ -64,6 +65,36 @@ kdtree *tree = NULL;
 
 
 
+
+
+
+
+int remove_coincident_points() {
+    std::map<std::string, std::string> duplicateMap;
+    std::vector<point2D> nonDuplicatedPoints;
+    
+    for (int i=0; i<points.size(); i++) {
+        point2D temp = points.at(i);
+        std::ostringstream oss;
+        oss << temp.x << " " << temp.y;
+        std::string tempString = oss.str();
+        
+        // check if key is present
+        if (duplicateMap.find(tempString) != duplicateMap.end()){
+            std::cout << "map already contains the point!\n";
+        } else{
+            duplicateMap[tempString] = "";
+            nonDuplicatedPoints.push_back(temp);
+            //Add element to new vector
+        }
+        
+        // retrieve
+    }
+  
+    points = nonDuplicatedPoints;
+    return nonDuplicatedPoints.size();
+}
+
 /* ****************************** */
 /* initialize  the array of points stored in global variable points with random points */
 void initialize_points_random() {
@@ -74,7 +105,10 @@ void initialize_points_random() {
         point.y =  (int)(.1*WINDOWSIZE)/2 + rand() % ((int)(.9*WINDOWSIZE));
         points.push_back(point);
     }
+    n = remove_coincident_points();
 }
+
+
 
 
 /* ****************************** */
@@ -92,6 +126,9 @@ void print_points() {
 
 
 
+
+
+
 void reset() {
     
     //re-initialize points
@@ -104,7 +141,7 @@ void reset() {
     
     Rtimer rt1;
     rt_start(rt1);
-    tree = kdtree_build(points, n);
+    tree = kdtree_build(points);
     rt_stop(rt1);
     char buf [1024];
     rt_sprint(buf,rt1);
@@ -112,7 +149,7 @@ void reset() {
     fflush(stdout);
     
     // print the tree
-   kdtree_print(tree);
+    kdtree_print(tree);
 }
 
 
@@ -208,7 +245,7 @@ void draw_points(){
     //set color
     glColor3fv(yellow);
     
-       int i;
+    int i;
     for (i=0; i<n; i++) {
         draw_point(points.at(i));
     }
@@ -287,7 +324,7 @@ void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integ
     
     glMatrixMode(GL_PROJECTION);  // To operate on the Projection matrix
     glLoadIdentity();             // Reset
-    gluOrtho2D(0.0, (GLdouble) width, 0.0, (GLdouble) height); 
+    gluOrtho2D(0.0, (GLdouble) width, 0.0, (GLdouble) height);
 }
 
 

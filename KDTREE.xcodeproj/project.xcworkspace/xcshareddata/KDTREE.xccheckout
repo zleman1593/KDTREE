@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>686B04FE-B4CA-432D-9B80-88DCF1DFE570</string>
 	<key>IDESourceControlProjectName</key>
-	<string>KDTREE</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>359875A5B6AD17478F785A0EE48EF0A3CEA75192</key>
 		<string>https://github.com/zleman1593/KDTREE.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>KDTREE.xcodeproj</string>
+	<string>KDTREE.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>359875A5B6AD17478F785A0EE48EF0A3CEA75192</key>

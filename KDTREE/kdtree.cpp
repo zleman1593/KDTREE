@@ -125,7 +125,6 @@ struct yCompare
 kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<point2D> ySortedPointsVector,bounds xAndYBounds, int depth){
     
     
-    
     kdtree* VLeft;
     kdtree* VRight;
     bounds xAndYBoundsForLeft;//Bottom
@@ -155,7 +154,7 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         //iterate over all values that have
         for (i = medianIndex; xSortedPointsVector.at(i).x == medianXValue; i--){
             if (i == 0) {
-                i--;// Causes error
+                i--;
                 break;
             }
         }
@@ -184,10 +183,8 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         
         
         //BOUNDS
-        
         xAndYBoundsForLeft = xAndYBounds;
         xAndYBoundsRight = xAndYBounds;
-        //Shoudl these be set to the same number?   ok?
         xAndYBoundsForLeft.x_upper = medianXValue;
         xAndYBoundsRight.x_lower = medianXValue;
         
@@ -213,7 +210,7 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         //iterate over all values that have
         for (i = medianIndex; ySortedPointsVector.at(i).y == medianYValue; i--){
             if (i == 0) {
-                i--;// Causes error
+                i--;
                 break;
             }
         }
@@ -242,53 +239,37 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         
         
         //BOUNDS
-        
         xAndYBoundsForLeft = xAndYBounds;
         xAndYBoundsRight = xAndYBounds;
-        //Shoudl these be set to the same number?   ok?
         xAndYBoundsForLeft.y_upper = medianYValue;
         xAndYBoundsRight.y_lower = medianYValue;
+
+        VLeft = xSortedPointsVectorForLeft.size() != 0 ? kdtree_build_rec(ySortedPointsVectorForLeft,xSortedPointsVectorForLeft,xAndYBoundsForLeft,depth + 1) : NULL;
         
-        if(xSortedPointsVectorForLeft.size() != 0){
-            VLeft = kdtree_build_rec(ySortedPointsVectorForLeft,xSortedPointsVectorForLeft,xAndYBoundsForLeft,depth + 1);
-        }else{
-            VLeft = NULL;
-        }
-        if(xSortedPointsVectorForRight.size() != 0){
-            VRight = kdtree_build_rec(ySortedPointsVectorForRight,xSortedPointsVectorForRight,xAndYBoundsRight, depth + 1);
-        }else{
-            VLeft = NULL;
-        }
+        VRight = xSortedPointsVectorForRight.size() != 0 ? kdtree_build_rec(ySortedPointsVectorForRight,xSortedPointsVectorForRight,xAndYBoundsRight, depth + 1) : NULL;
+
         
         
     }
-    
-    
     
     
     treeNode* node = new treeNode();
     
-    if (depth % 2 == 0) {
-        node->type = 'v';
-    } else{
-        node->type = 'h';
-    }
-    node->p = median; //----------------------------------------------------- PUT MEDIAN POINT HERE
+    depth % 2 == 0 ? node->type = 'v' : node->type = 'h';
+
+    node->p = median;
+    
     node->nodeBounds = xAndYBounds;
-    if(VLeft != NULL){
-        node->left = VLeft->root;
-    } else {
-        node->left  = NULL;
-    }
-    if(VLeft != NULL){
-        node->right = VRight->root;
-    } else {
-        node->right  = NULL;
-    }
+    
+    VLeft != NULL ? node->left = VLeft->root : node->left  = NULL;
+    
+    VLeft != NULL ? node->right = VRight->root : node->right  = NULL;
+    
     
     kdtree* tree = kdtree_init();
-    tree->count = VLeft->count + VRight->count;
-    tree->height = std::max(VLeft->height, VRight->height) + 1;
+    
+    tree->count = (VLeft != NULL ? VLeft->count : 0 ) + (VRight != NULL ? VRight->count : 0 );
+    tree->height = std::max((VLeft != NULL ? VLeft->height : 0 ), (VRight != NULL ? VRight->height : 0 )) + 1;
     tree->root = node;
     return tree;
     

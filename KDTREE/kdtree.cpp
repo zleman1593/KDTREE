@@ -124,7 +124,7 @@ struct yCompare
 
 kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<point2D> ySortedPointsVector,bounds xAndYBounds, int depth){
     
-   
+    
     
     kdtree* VLeft;
     kdtree* VRight;
@@ -153,7 +153,12 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         int i;
         
         //iterate over all values that have
-        for (i = medianIndex; xSortedPointsVector.at(i).x == medianXValue; i--){}
+        for (i = medianIndex; xSortedPointsVector.at(i).x == medianXValue; i--){
+            if (i == 0) {
+                i--;// Causes error
+                break;
+            }
+        }
         
         //Set pointer to the leftmost value that has the same x value as the median
         i = i + 1;
@@ -206,8 +211,12 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         int i;
         
         //iterate over all values that have
-        for (i = medianIndex; ySortedPointsVector.at(i).y == medianYValue; i--){}
-        
+        for (i = medianIndex; ySortedPointsVector.at(i).y == medianYValue; i--){
+            if (i == 0) {
+                i--;// Causes error
+                break;
+            }
+        }
         //Set pointer to the leftmost value that has the same y value as the median
         i = i + 1;
         

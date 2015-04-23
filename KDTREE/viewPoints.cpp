@@ -280,8 +280,8 @@ void draw_point(point2D point)
 /* draw a line between two points */
 void draw_line(lineSegment2D line)
 {
-    glColor3fv(cyan);
-    
+    glColor3fv(black);
+    glLineWidth(40);
     glBegin(GL_LINES);
     glVertex2f(line.p1.x, line.p1.y);
     glVertex2f(line.p2.x, line.p2.y);
@@ -313,6 +313,44 @@ void draw_points(){
     
 }
 
+void fillRec(bounds nodeBounds){
+    point2D a, b, c, d;
+    a.x = nodeBounds.x_lower;
+    a.y = nodeBounds.y_upper;
+    b.x = nodeBounds.x_upper;
+    b.y = nodeBounds.y_upper;
+    c.x = nodeBounds.x_lower;
+    c.y = nodeBounds.y_lower;
+    d.x = nodeBounds.x_upper;
+    d.y = nodeBounds.y_lower;
+    
+    int color = rand() % 4 + 1;
+    
+    switch ( color )
+    {
+        case 1:
+            glColor3fv(red);
+            break;
+        case 2:
+            glColor3fv(blue);
+            break;
+        case 3:
+               glColor3fv(yellow);
+            break;
+        case 4:
+               glColor3fv(white);
+            break;
+    }
+    
+ 
+    glBegin(GL_POLYGON);
+    glVertex2f(a.x, a.y);
+    
+    glVertex2f(c.x, c.y);
+    glVertex2f(d.x, d.y);
+    glVertex2f(b.x, b.y);
+    glEnd();
+}
 
 /* ****************************** */
 /* recursive draw function for drawing a tree rooted at the given node
@@ -352,6 +390,7 @@ void draw_node(treeNode *node)
     
                 break;
             case 'l':
+                fillRec( node->nodeBounds);
                 printf("Not Drawing Lef node: (p=(%d,%d))\n", node->p.x, node->p.y);
                 break;
             default:
@@ -368,6 +407,9 @@ void draw_node(treeNode *node)
         draw_node(node->right);
         
     }
+
+
+
 
 
 /* ****************************** */

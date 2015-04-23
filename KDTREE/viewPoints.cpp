@@ -184,7 +184,7 @@ int main(int argc, char * argv[]) {
     
     /* init GL */
     /* set background color black*/
-    glClearColor(0, 0, 0, 0);
+    glClearColor(1, 1, 1, 1);
     
     /* circular points */
     glEnable(GL_POINT_SMOOTH);
@@ -207,7 +207,7 @@ int main(int argc, char * argv[]) {
 /* draw a single point */
 void draw_point(point2D point)
 {
-    glColor3fv(yellow);
+    glColor3fv(blue);
     
     glBegin(GL_POINTS);
     glVertex2f(point.x, point.y);
@@ -258,8 +258,56 @@ void draw_points(){
  */
 void draw_node(treeNode *node)
 {
-    //fill in
-}
+        
+        if (node == NULL) return;
+        
+        //if we are here, node must be valid
+        
+        //recursively print left child
+       draw_node(node->left);
+        lineSegment2D line = lineSegment2D();
+        point2D pointA = point2D();
+        point2D pointB = point2D();
+        //print node
+        switch (node->type) {
+            case 'h':
+                printf("HORIZONTAL: (y=%d)\n", node->p.y);
+                //Y coords are same
+                pointA.y = node->p.y;
+                pointB.y =  pointA.y;
+                
+                pointA.x = node->nodeBounds.x_lower;
+                pointB.x =  node->nodeBounds.x_upper;
+                
+                break;
+            case 'v':
+                printf("VERTICAL: (x=%d)\n", node->p.x);
+                //X coords are same
+                pointA.x = node->p.x;
+                pointB.x =  pointA.x;
+                
+                pointA.y = node->nodeBounds.y_lower;
+                pointB.y =  node->nodeBounds.y_upper;
+    
+                break;
+            case 'l':
+                printf("Not Drawing Lef node: (p=(%d,%d))\n", node->p.x, node->p.y);
+                break;
+            default:
+                printf("Improper tree node type\n");
+                exit(1);
+        };
+    
+    
+        line.p1 = pointA;
+        line.p2 = pointB;
+        draw_line(line);
+    
+        //recursively print right child
+        draw_node(node->right);
+        
+    }
+
 
 /* ****************************** */
 /* draw the kd-tree stored in the global variable kdTree
@@ -287,7 +335,7 @@ void display(void) {
     glTranslatef(-WINDOWSIZE/2, -WINDOWSIZE/2, 0);
     
     //eventually we'll want to call the function that draws the kdtree
-    //draw_kdtree();
+    draw_kdtree();
     
     //for now we just draw the input points
     draw_points();

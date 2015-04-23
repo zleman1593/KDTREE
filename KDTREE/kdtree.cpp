@@ -133,14 +133,14 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
     
     //If are contains only one point
     if (xSortedPointsVector.size() == 1){
-        treeNode leafNode = treeNode();
-        leafNode.type = 'l';
-        leafNode.nodeBounds = xAndYBounds;
-        leafNode.p = xSortedPointsVector[0];
+        treeNode* leafNode = new treeNode();
+        leafNode->type = 'l';
+        leafNode->nodeBounds = xAndYBounds;
+        leafNode->p = xSortedPointsVector[0];
         kdtree* tree = kdtree_init();
         tree->count = 1;
         tree->height = 1;
-        tree->root = &leafNode;
+        tree->root = leafNode;
         return tree;
     } else if (depth % 2 == 0){
         
@@ -153,7 +153,7 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         //iterate over all values that have
         for (i = medianIndex; xSortedPointsVector.at(i).x == medianXValue; i--){}
         
-        //Set pointer to the leftmost value that has the same x vakeu as the median
+        //Set pointer to the leftmost value that has the same x value as the median
         i = i + 1;
         
         
@@ -183,9 +183,16 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         xAndYBoundsForLeft.x_upper = medianXValue;
         xAndYBoundsRight.x_lower = medianXValue;
         
-        
-        VLeft = kdtree_build_rec(xSortedPointsVectorForLeft,ySortedPointsVectorForLeft,xAndYBoundsForLeft,depth + 1);
-        VRight = kdtree_build_rec(xSortedPointsVectorForRight,ySortedPointsVectorForRight,xAndYBoundsRight, depth + 1);
+        if (xSortedPointsVectorForLeft.size() != 0) {
+            VLeft = kdtree_build_rec(xSortedPointsVectorForLeft,ySortedPointsVectorForLeft,xAndYBoundsForLeft,depth + 1);
+        }else{
+            VLeft = NULL;
+        }
+        if(xSortedPointsVectorForRight.size() != 0){
+            VRight = kdtree_build_rec(xSortedPointsVectorForRight,ySortedPointsVectorForRight,xAndYBoundsRight, depth + 1);
+        } else{
+            VRight = NULL;
+        }
         
     } else{
         
@@ -228,30 +235,47 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         xAndYBoundsForLeft.y_upper = medianYValue;
         xAndYBoundsRight.y_lower = medianYValue;
         
+        if(xSortedPointsVectorForRight.size() != 0){
+            VLeft = kdtree_build_rec(ySortedPointsVectorForLeft,xSortedPointsVectorForLeft,xAndYBoundsForLeft,depth + 1);
+        }else{
+            VLeft = NULL;
+        }
+        if(xSortedPointsVectorForRight.size() != 0){
+            VRight = kdtree_build_rec(ySortedPointsVectorForRight,xSortedPointsVectorForRight,xAndYBoundsRight, depth + 1);
+        }else{
+            VLeft = NULL;
+        }
         
-        VLeft = kdtree_build_rec(ySortedPointsVectorForLeft,xSortedPointsVectorForLeft,xAndYBoundsForLeft,depth + 1);
-        VRight = kdtree_build_rec(ySortedPointsVectorForRight,xSortedPointsVectorForRight,xAndYBoundsRight, depth + 1);
+        
     }
     
     
     
     
-    treeNode node = treeNode();
+    treeNode* node = new treeNode();
     
     if (depth % 2 == 0) {
-        node.type = 'h';
+        node->type = 'h';
     } else{
-        node.type = 'v';
+        node->type = 'v';
     }
-    node.p = median; //----------------------------------------------------- PUT MEDIAN POINT HERE
-    node.nodeBounds = xAndYBounds;
-    node.left = VLeft->root;
-    node.right = VRight->root;
+    node->p = median; //----------------------------------------------------- PUT MEDIAN POINT HERE
+    node->nodeBounds = xAndYBounds;
+    if(VLeft != NULL){
+        node->left = VLeft->root;
+    } else {
+        node->left  = NULL;
+    }
+    if(VLeft != NULL){
+        node->right = VRight->root;
+    } else {
+        node->right  = NULL;
+    }
     
     kdtree* tree = kdtree_init();
     tree->count = VLeft->count + VRight->count;
     tree->height = std::max(VLeft->height, VRight->height) + 1;
-    tree->root = &node;
+    tree->root = node;
     return tree;
     
 }

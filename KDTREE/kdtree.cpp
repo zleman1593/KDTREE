@@ -124,10 +124,12 @@ struct yCompare
 
 kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<point2D> ySortedPointsVector,bounds xAndYBounds, int depth){
     
+   
+    
     kdtree* VLeft;
     kdtree* VRight;
-    bounds xAndYBoundsForLeft;
-    bounds xAndYBoundsRight;
+    bounds xAndYBoundsForLeft;//Bottom
+    bounds xAndYBoundsRight;//Top
     point2D median;
     
     
@@ -156,7 +158,8 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         //Set pointer to the leftmost value that has the same x value as the median
         i = i + 1;
         
-        
+        //Update Median so line will draw through proper point
+        median = xSortedPointsVector.at(i);
         
         //Get all points in sorted order that will be part of the left part
         std::vector<point2D>  xSortedPointsVectorForLeft(xSortedPointsVector.begin(),xSortedPointsVector.begin() + i);
@@ -208,6 +211,8 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         //Set pointer to the leftmost value that has the same y value as the median
         i = i + 1;
         
+        //Update Median so line will draw through proper point
+        median = ySortedPointsVector.at(i);
         
         
         //Get all points in sorted order that will be part of the left part
@@ -235,7 +240,7 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         xAndYBoundsForLeft.y_upper = medianYValue;
         xAndYBoundsRight.y_lower = medianYValue;
         
-        if(xSortedPointsVectorForRight.size() != 0){
+        if(xSortedPointsVectorForLeft.size() != 0){
             VLeft = kdtree_build_rec(ySortedPointsVectorForLeft,xSortedPointsVectorForLeft,xAndYBoundsForLeft,depth + 1);
         }else{
             VLeft = NULL;
@@ -255,9 +260,9 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
     treeNode* node = new treeNode();
     
     if (depth % 2 == 0) {
-        node->type = 'h';
-    } else{
         node->type = 'v';
+    } else{
+        node->type = 'h';
     }
     node->p = median; //----------------------------------------------------- PUT MEDIAN POINT HERE
     node->nodeBounds = xAndYBounds;
@@ -292,10 +297,10 @@ kdtree* kdtree_build(std::vector<point2D> points) {
     std::sort(ySortedPointsVector.begin(),ySortedPointsVector.end(),yCompare());
     //Start Recursion
     bounds boundingBox = bounds();
-    boundingBox.x_lower = xSortedPointsVector.at(0).x;
-    boundingBox.x_upper = xSortedPointsVector.at(xSortedPointsVector.size() - 1).x;
-    boundingBox.y_lower = ySortedPointsVector.at(0).y;
-    boundingBox.y_upper = ySortedPointsVector.at(ySortedPointsVector.size() - 1).y;
+    boundingBox.x_lower = 0;
+    boundingBox.x_upper = WINDOWSIZE;
+    boundingBox.y_lower = 0;
+    boundingBox.y_upper = WINDOWSIZE;
     return kdtree_build_rec(xSortedPointsVector,ySortedPointsVector,boundingBox,1);
     
 }

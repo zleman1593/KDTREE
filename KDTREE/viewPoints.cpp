@@ -50,10 +50,6 @@ void display(void);
 void keypress(unsigned char key, int x, int y);
 
 
-/* global variables */
-const int WINDOWSIZE = 500;
-const int POINT_SIZE  = 6.0f;
-
 //the array of n points
 int n;
 std::vector<point2D> points;
@@ -98,6 +94,7 @@ int remove_coincident_points() {
 /* ****************************** */
 /* initialize  the array of points stored in global variable points with random points */
 void initialize_points_random() {
+//
     
     for (int i=0; i<n; i++) {
         point2D point = point2D();
@@ -107,6 +104,68 @@ void initialize_points_random() {
     }
     n = remove_coincident_points();
 }
+
+/* initialize the array of points stored in global variable points with certain points */
+void initialize_points_case1() {
+    
+    point2D pointA = point2D();
+    pointA.x = 370;
+    pointA.y = 73;
+    points.push_back(pointA);
+    point2D pointB = point2D();
+    pointB.x = 370;
+    pointB.y = 132;
+    points.push_back(pointB);
+    point2D pointC = point2D();
+    pointC.x = 370;
+    pointC.y = 297;
+    points.push_back(pointC);
+    point2D pointD = point2D();
+    pointD.x = 444;
+    pointD.y = 415;
+    points.push_back(pointD);
+    n = remove_coincident_points();
+}
+
+
+/* initialize the array of points stored in global variable points with certain points */
+void initialize_points_case2() {
+    //
+    
+    point2D pointA = point2D();
+    pointA.x = 73;
+    pointA.y = 370;
+    points.push_back(pointA);
+    point2D pointB = point2D();
+    pointB.x = 132;
+    pointB.y = 370;
+    points.push_back(pointB);
+    point2D pointC = point2D();
+    pointC.x = 297;
+    pointC.y = 370;
+    points.push_back(pointC);
+    point2D pointD = point2D();
+    pointD.x = 415;
+    pointD.y = 444;
+    points.push_back(pointD);
+    n = remove_coincident_points();
+}
+
+/* initialize the array of points stored in global variable points with certain points */
+void initialize_points_case3() {
+    //
+    
+    for (int i=0; i<n; i++) {
+        point2D point = point2D();
+        point.x = (int)(.1*WINDOWSIZE)/2 + rand() % ((int)(.9*WINDOWSIZE));
+        point.y =  (int)(.1*WINDOWSIZE)/2 + rand() % ((int)(.9*WINDOWSIZE));
+        points.push_back(point);
+    }
+    n = remove_coincident_points();
+}
+
+
+
 
 
 
@@ -134,6 +193,8 @@ void reset() {
     //re-initialize points
     
     initialize_points_random();
+//    initialize_points_case1();
+       //initialize_points_case2();
     
     //free current tree
     if (tree) kdtree_free(tree);
@@ -264,7 +325,7 @@ void draw_node(treeNode *node)
         //if we are here, node must be valid
         
         //recursively print left child
-       draw_node(node->left);
+        draw_node(node->left);
         lineSegment2D line = lineSegment2D();
         point2D pointA = point2D();
         point2D pointB = point2D();

@@ -10,7 +10,9 @@
 #include "geom.h"
 #include <stddef.h> //for size_t
 #include <vector>
-
+/* global variables */
+const int WINDOWSIZE = 500;
+const int POINT_SIZE  = 6.0f;
 
 typedef struct _treeNode treeNode;
 

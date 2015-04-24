@@ -1,5 +1,6 @@
 /*
- Laura Toma, Rob Visentin
+ Base code From: Laura Toma, Rob Visentin
+ Complete KD-Tree Algorithm and custom Drawing By Zackery Leman and Ivy Xing
  
  What it does:
  
@@ -15,7 +16,6 @@
 #include <vector>
 #include "rtimer.h"
 #include "kdtree.h"
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -31,7 +31,7 @@
 #include <GLUT/glut.h> // Header File For The GLut Library
 
 
-
+//Colors
 GLfloat red[3] = {1.0, 0.0, 0.0};
 GLfloat green[3] = {0.0, 1.0, 0.0};
 GLfloat blue[3] = {0.0, 0.0, 1.0};
@@ -49,6 +49,8 @@ GLfloat cyan[3] = {0.0, 1.0, 1.0};
 void display(void);
 void keypress(unsigned char key, int x, int y);
 
+//Draw points or not
+bool drawPoints = false;
 
 //the array of n points
 int n;
@@ -59,12 +61,7 @@ std::vector<point2D> points;
 kdtree *tree = NULL;
 
 
-
-
-
-
-
-
+/*Method to remove all identical points. Done in linear time with hashmap*/
 int remove_coincident_points() {
     std::map<std::string, std::string> duplicateMap;
     std::vector<point2D> nonDuplicatedPoints;
@@ -83,18 +80,15 @@ int remove_coincident_points() {
             nonDuplicatedPoints.push_back(temp);
             //Add element to new vector
         }
-        
-        // retrieve
     }
-  
+    
     points = nonDuplicatedPoints;
     return nonDuplicatedPoints.size();
 }
 
-/* ****************************** */
-/* initialize  the array of points stored in global variable points with random points */
+
+/* Initialize  the array of points stored in global variable points with random points */
 void initialize_points_random() {
-//
     
     for (int i=0; i<n; i++) {
         point2D point = point2D();
@@ -105,7 +99,26 @@ void initialize_points_random() {
     n = remove_coincident_points();
 }
 
-/* initialize the array of points stored in global variable points with certain points */
+/* Initialize the array of points stored in global variable points with certain points for oth test case */
+void initialize_points_case0() {
+    
+    point2D pointA = point2D();
+    pointA.x = 100;
+    pointA.y = 400;
+    points.push_back(pointA);
+    point2D pointB = point2D();
+    pointB.x = 370;
+    pointB.y = 400;
+    points.push_back(pointB);
+    point2D pointC = point2D();
+    pointC.x = 20;
+    pointC.y = 400;
+    points.push_back(pointC);
+
+    n = remove_coincident_points();
+}
+
+/* Initialize the array of points stored in global variable points with certain points for first test case */
 void initialize_points_case1() {
     
     point2D pointA = point2D();
@@ -128,10 +141,9 @@ void initialize_points_case1() {
 }
 
 
-/* initialize the array of points stored in global variable points with certain points */
+/* initialize the array of points stored in global variable points with certain points for second test case */
 void initialize_points_case2() {
-    //
-    
+ 
     point2D pointA = point2D();
     pointA.x = 73;
     pointA.y = 370;
@@ -151,27 +163,53 @@ void initialize_points_case2() {
     n = remove_coincident_points();
 }
 
-/* initialize the array of points stored in global variable points with certain points */
+/* initialize the array of points stored in global variable points with certain points for third test case */
 void initialize_points_case3() {
-    //
-    
-    for (int i=0; i<n; i++) {
-        point2D point = point2D();
-        point.x = (int)(.1*WINDOWSIZE)/2 + rand() % ((int)(.9*WINDOWSIZE));
-        point.y =  (int)(.1*WINDOWSIZE)/2 + rand() % ((int)(.9*WINDOWSIZE));
-        points.push_back(point);
-    }
+    point2D pointA = point2D();
+    pointA.x = 73;
+    pointA.y = 370;
+    points.push_back(pointA);
+    point2D pointB = point2D();
+    pointB.x = 132;
+    pointB.y = 370;
+    points.push_back(pointB);
+    point2D pointC = point2D();
+    pointC.x = 297;
+    pointC.y = 370;
+    points.push_back(pointC);
+    point2D pointD = point2D();
+    pointD.x = 415;
+    pointD.y = 370;
+    points.push_back(pointD);
+    n = remove_coincident_points();
+}
+
+/* initialize the array of points stored in global variable points with certain points for third test case */
+void initialize_points_case4() {
+
+    point2D pointA = point2D();
+    pointA.x = 302;
+    pointA.y = 41;
+    points.push_back(pointA);
+    point2D pointB = point2D();
+    pointB.x = 474;
+    pointB.y = 164;
+    points.push_back(pointB);
+    point2D pointC = point2D();
+    pointC.x = 460;
+    pointC.y = 178;
+    points.push_back(pointC);
+    point2D pointD = point2D();
+    pointD.x = 172;
+    pointD.y = 304;
+    points.push_back(pointD);
     n = remove_coincident_points();
 }
 
 
 
 
-
-
-
-/* ****************************** */
-/* print the array of points stored in global variable points*/
+/* Print the array of points stored in global variable points*/
 void print_points() {
     
     int i;
@@ -184,22 +222,20 @@ void print_points() {
 }
 
 
-
-
-
-
 void reset() {
     
     //re-initialize points
-    
     initialize_points_random();
-//    initialize_points_case1();
-       //initialize_points_case2();
+    //initialize_points_case0();
+    //initialize_points_case1();
+    //initialize_points_case2();
+    //initialize_points_case3();
+    //initialize_points_case4();
     
     //free current tree
     if (tree) kdtree_free(tree);
     
-    
+    //Build the tree
     Rtimer rt1;
     rt_start(rt1);
     tree = kdtree_build(points);
@@ -214,7 +250,7 @@ void reset() {
 }
 
 
-/* ****************************** */
+/* MAIN METHOD */
 int main(int argc, char * argv[]) {
     
     // read number of points from user
@@ -262,26 +298,10 @@ int main(int argc, char * argv[]) {
 }
 
 
-
-
-/* ****************************** */
-/* draw a single point */
-void draw_point(point2D point)
-{
-    glColor3fv(blue);
-    
-    glBegin(GL_POINTS);
-    glVertex2f(point.x, point.y);
-    glEnd();
-}
-
-
-/* ****************************** */
 /* draw a line between two points */
-void draw_line(lineSegment2D line)
-{
-    glColor3fv(cyan);
-    
+void draw_line(lineSegment2D line){
+    glColor3fv(black);
+    glLineWidth(40);
     glBegin(GL_LINES);
     glVertex2f(line.p1.x, line.p1.y);
     glVertex2f(line.p2.x, line.p2.y);
@@ -289,99 +309,127 @@ void draw_line(lineSegment2D line)
 }
 
 
-
-
-
-/* ****************************** */
-/* Draw the array of points stored in global variable points vector.
- Each point is drawn as a small square
- 
- */
+/* Draw the array of points stored in global variable points vector.*/
 void draw_points(){
-    
-    const int R= 1;
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    
-    //set color
-    glColor3fv(yellow);
-    
-    int i;
-    for (i=0; i<n; i++) {
-        draw_point(points.at(i));
+    for (int i=0; i<n; i++) {
+            point2D point = points.at(i);
+            glColor3fv(blue);
+            glBegin(GL_POINTS);
+            glVertex2f(point.x, point.y);
+            glEnd();
     }
     
 }
 
+/*Takes a bounding box for a node and colors it in randomly with one of four colors */
+void fillRec(bounds nodeBounds){
+    point2D a, b, c, d;
+    a.x = nodeBounds.x_lower;
+    a.y = nodeBounds.y_upper;
+    b.x = nodeBounds.x_upper;
+    b.y = nodeBounds.y_upper;
+    c.x = nodeBounds.x_lower;
+    c.y = nodeBounds.y_lower;
+    d.x = nodeBounds.x_upper;
+    d.y = nodeBounds.y_lower;
+    
+    int color = rand() % 4 + 1;
+    
+    switch ( color )
+    {
+        case 1:
+            glColor3fv(red);
+            break;
+        case 2:
+            glColor3fv(blue);
+            break;
+        case 3:
+            glColor3fv(yellow);
+            break;
+        case 4:
+            glColor3fv(white);
+            break;
+    }
+    
+    
+    glBegin(GL_POLYGON);
+    glVertex2f(a.x, a.y);
+    glVertex2f(c.x, c.y);
+    glVertex2f(d.x, d.y);
+    glVertex2f(b.x, b.y);
+    glEnd();
+}
 
-/* ****************************** */
-/* recursive draw function for drawing a tree rooted at the given node
- */
+
+/* Recursive draw function for drawing a tree rooted at the given node*/
 void draw_node(treeNode *node)
 {
-        
-        if (node == NULL) return;
-        
-        //if we are here, node must be valid
-        
-        //recursively print left child
-        draw_node(node->left);
-        lineSegment2D line = lineSegment2D();
-        point2D pointA = point2D();
-        point2D pointB = point2D();
-        //print node
-        switch (node->type) {
-            case 'h':
-                printf("HORIZONTAL: (y=%d)\n", node->p.y);
-                //Y coords are same
-                pointA.y = node->p.y;
-                pointB.y =  pointA.y;
-                
-                pointA.x = node->nodeBounds.x_lower;
-                pointB.x =  node->nodeBounds.x_upper;
-                
-                break;
-            case 'v':
-                printf("VERTICAL: (x=%d)\n", node->p.x);
-                //X coords are same
-                pointA.x = node->p.x;
-                pointB.x =  pointA.x;
-                
-                pointA.y = node->nodeBounds.y_lower;
-                pointB.y =  node->nodeBounds.y_upper;
+    if (node == NULL) return;
     
-                break;
-            case 'l':
-                printf("Not Drawing Lef node: (p=(%d,%d))\n", node->p.x, node->p.y);
-                break;
-            default:
-                printf("Improper tree node type\n");
-                exit(1);
-        };
+    //if we are here, node must be valid
+    
+    //recursively print left child
+    draw_node(node->left);
+    lineSegment2D line = lineSegment2D();
+    point2D pointA = point2D();
+    point2D pointB = point2D();
+    
+
+    switch (node->type) {
+        case 'h':
+            //Draw line for node
+            printf("HORIZONTAL: (y=%d)\n", node->p.y);
+            
+            //Y coords are same
+            pointA.y = node->p.y;
+            pointB.y =  pointA.y;
+            
+            pointA.x = node->nodeBounds.x_lower;
+            pointB.x =  node->nodeBounds.x_upper;
+            
+            break;
+        case 'v':
+            //Draw line for node
+            printf("VERTICAL: (x=%d)\n", node->p.x);
+            
+            //X coords are same
+            pointA.x = node->p.x;
+            pointB.x =  pointA.x;
+            
+            pointA.y = node->nodeBounds.y_lower;
+            pointB.y =  node->nodeBounds.y_upper;
+            break;
+        case 'l':
+            //Fill rectangle for node
+            fillRec( node->nodeBounds);
+            printf("Not Drawing Lef node: (p=(%d,%d))\n", node->p.x, node->p.y);
+            break;
+        default:
+            printf("Improper tree node type\n");
+            exit(1);
+    };
     
     
-        line.p1 = pointA;
-        line.p2 = pointB;
-        draw_line(line);
+    line.p1 = pointA;
+    line.p2 = pointB;
+    draw_line(line);
     
-        //recursively print right child
-        draw_node(node->right);
-        
-    }
+    //recursively print right child
+    draw_node(node->right);
+    
+}
 
 
-/* ****************************** */
-/* draw the kd-tree stored in the global variable kdTree
+/* Draw the kd-tree stored in the global variable kdTree
  */
-void draw_kdtree()
-{
+void draw_kdtree(){
     assert(tree);
     draw_node(tree->root);
 }
 
 
 
-/* ****************************** */
+/*Display Function that calls the draw tree and points method */
 void display(void) {
     
     glClear(GL_COLOR_BUFFER_BIT);
@@ -398,8 +446,11 @@ void display(void) {
     //eventually we'll want to call the function that draws the kdtree
     draw_kdtree();
     
-    //for now we just draw the input points
-    draw_points();
+    //Draw points
+    if (drawPoints) {
+           draw_points();
+    }
+
     
     /* execute the drawing commands */
     glFlush();
@@ -408,7 +459,7 @@ void display(void) {
 
 
 
-/* ****************************** */
+/* Updates the display when keys are pressed */
 void keypress(unsigned char key, int x, int y) {
     switch(key)
     {
@@ -416,7 +467,11 @@ void keypress(unsigned char key, int x, int y) {
             reset();
             glutPostRedisplay();
             break;
-            
+        case 'p':
+            drawPoints = drawPoints ? false : true;
+            reset();
+            glutPostRedisplay();
+            break;
         case 'q':
             exit(0);
             break;

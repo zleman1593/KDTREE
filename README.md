@@ -1,5 +1,6 @@
 # KDTREE
-This program builds a kd-tree for a set of random points and uses the tree to draw  something that looks like a Mondrian painting.
+
+This program builds a 2D kd-tree for a set of random points, renders it in 2D with default orthogonal projection, and uses the tree to draw something that looks like a Mondrian painting.
 
 Compile with command:
 make -f Makefile.txt

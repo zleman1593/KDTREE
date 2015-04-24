@@ -11,25 +11,6 @@
 
 
 
-
-/* returns the root node of the given tree */
-treeNode* kdtree_getRoot(kdtree *tree) {
-    
-    assert(tree);
-    return tree->root;
-}
-
-/* returns the point stored by the node */
-point2D treeNode_getPoint(treeNode *node) {
-    
-    assert(node);
-    return node->p;
-}
-
-
-
-
-
 /* create a new empty tree */
 kdtree* kdtree_init() {
     
@@ -41,7 +22,7 @@ kdtree* kdtree_init() {
     return tree;
 }
 
-/* private function to recursively print a node and its subtree in
+/* Private function to recursively print a node and its subtree in
  order */
 static void treeNode_print(treeNode * node) {
     
@@ -89,7 +70,7 @@ void kdtree_print(kdtree *tree) {
 
 //private function to recursively free the subtree rooted at node
 static void treeNode_free(treeNode* node) {
-
+    
     
 }
 
@@ -103,7 +84,7 @@ void kdtree_free(kdtree *tree) {
     free(tree);
 }
 
-
+//Custom Comparators
 struct xCompare
 {
     inline bool operator() (const point2D& struct1, const point2D& struct2)
@@ -121,95 +102,94 @@ struct yCompare
 };
 
 
-
+/* Recursively called method to create a new treefor the points */
 kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<point2D> ySortedPointsVector,bounds xAndYBounds, int depth){
     
     
-    kdtree* VLeft;
-    kdtree* VRight;
+    //BASE CASE: If area contains no points return NULL to stop recursion
+    if (xSortedPointsVector.size() == 0){
+        return NULL;
+    }
+    
+    kdtree* VLeft;//Left Subtree
+    kdtree* VRight;//Right Subtree
     bounds xAndYBoundsForLeft;//Bottom
     bounds xAndYBoundsRight;//Top
-    point2D median;
+    xAndYBoundsForLeft = xAndYBounds;
+    xAndYBoundsRight = xAndYBounds;
+    point2D median;//Median Point for the split
+
+    int numberOfPoints = ySortedPointsVector.size();
+    int medianIndex = numberOfPoints/2;
     
-    std::sort(xSortedPointsVector.begin(),xSortedPointsVector.end(),xCompare());
-    std::sort(ySortedPointsVector.begin(),ySortedPointsVector.end(),yCompare());
-    
-    //If are contains only one point
+    //BASE CASE: If area contains only one point
     if (xSortedPointsVector.size() == 1){
+        //Create a noe for this point
         treeNode* leafNode = new treeNode();
         leafNode->type = 'l';
         leafNode->nodeBounds = xAndYBounds;
         leafNode->p = xSortedPointsVector[0];
+        //Create a tree "wrapper" for the node so it can be passed back
         kdtree* tree = kdtree_init();
         tree->count = 1;
         tree->height = 1;
         tree->root = leafNode;
         return tree;
-    } else if (depth % 2 == 0){
         
-        int numberOfPoints = xSortedPointsVector.size();
-        int medianIndex = numberOfPoints/2;
+    } else if (depth % 2 == 0){//Use depth to determine to split by X or Y
+        //Split By X
         median = xSortedPointsVector.at(medianIndex);
         int medianXValue = median.x;
         int i;
         
-        //iterate over all values that have
+        //iterate over all values that have the same X coord
         for (i = medianIndex; xSortedPointsVector.at(i).x == medianXValue; i--){
             if (i == 0) {
                 i--;
                 break;
             }
         }
-        
         //Set pointer to the leftmost value that has the same x value as the median
+        //Because for loop will leave i at one position below coorect value
         i = i + 1;
         
         //Update Median so line will draw through proper point
         median = xSortedPointsVector.at(i);
         
-        //Get all points in sorted order that will be part of the left part
+        //Get all points in sorted order that are to the left . This includes the point along the median line.
         std::vector<point2D>  xSortedPointsVectorForLeft(xSortedPointsVector.begin(),xSortedPointsVector.begin() + i);
-        //Copy all thesw points over to the array that will be sorted by y
+        //Copy all these points over to the array that will be sorted by y
         std::vector<point2D>  ySortedPointsVectorForLeft(xSortedPointsVectorForLeft);
-        //Sort the y array by y values
+        //Sort the y vector by y values
         std::sort(ySortedPointsVectorForLeft.begin(),ySortedPointsVectorForLeft.end(),yCompare());
         
         
         
-        //Get all points in sorted order that will be part of the right part
+        //Get all points in sorted order that are to the right . This excludes the point along the median line.
         std::vector<point2D>  xSortedPointsVectorForRight(xSortedPointsVector.begin() + i,xSortedPointsVector.end());
-        //Copy all thesw points over to the array that will be sorted by y
+        //Copy all these points over to the vector that will be sorted by y
         std::vector<point2D>  ySortedPointsVectorForRight(xSortedPointsVectorForRight);
-        //Sort the y array by y values
+        //Sort the y vector by y values
         std::sort(ySortedPointsVectorForRight.begin(),ySortedPointsVectorForRight.end(),yCompare());
         
         
         //BOUNDS
-        xAndYBoundsForLeft = xAndYBounds;
-        xAndYBoundsRight = xAndYBounds;
         xAndYBoundsForLeft.x_upper = medianXValue;
         xAndYBoundsRight.x_lower = medianXValue;
         
-        if (xSortedPointsVectorForLeft.size() != 0) {
-            VLeft = kdtree_build_rec(xSortedPointsVectorForLeft,ySortedPointsVectorForLeft,xAndYBoundsForLeft,depth + 1);
-        }else{
-            VLeft = NULL;
-        }
-        if(xSortedPointsVectorForRight.size() != 0){
-            VRight = kdtree_build_rec(xSortedPointsVectorForRight,ySortedPointsVectorForRight,xAndYBoundsRight, depth + 1);
-        } else{
-            VRight = NULL;
-        }
+        //Recursive Calls
+        VLeft =  kdtree_build_rec(xSortedPointsVectorForLeft,ySortedPointsVectorForLeft,xAndYBoundsForLeft,depth + 1);
+        VRight = kdtree_build_rec(xSortedPointsVectorForRight,ySortedPointsVectorForRight,xAndYBoundsRight, depth + 1);
+        
         
     } else{
         
-        int numberOfPoints = ySortedPointsVector.size();
-        int medianIndex = numberOfPoints/2;
         median = ySortedPointsVector.at(medianIndex);
         int medianYValue = median.y;
         int i;
         
-        //iterate over all values that have
+        //Set pointer to the leftmost value that has the same x value as the median
+        //Because for loop will leave i at one position below coorect value
         for (i = medianIndex; ySortedPointsVector.at(i).y == medianYValue; i--){
             if (i == 0) {
                 i--;
@@ -223,7 +203,7 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         median = ySortedPointsVector.at(i);
         
         
-        //Get all points in sorted order that will be part of the left part
+        //Get all points in sorted order that are to the left . This includes the point along the median line.
         std::vector<point2D>  ySortedPointsVectorForLeft(ySortedPointsVector.begin(),ySortedPointsVector.begin() + i);
         //Cop all thesw points over to the arrax that will be sorted bx x
         std::vector<point2D>  xSortedPointsVectorForLeft(ySortedPointsVectorForLeft);
@@ -232,7 +212,7 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         
         
         
-        //Get all points in sorted order that will be part of the right part
+        //Get all points in sorted order that are to the right . This excludes the point along the median line.
         std::vector<point2D>  ySortedPointsVectorForRight(ySortedPointsVector.begin() + i,ySortedPointsVector.end());
         //Copx all thesw points over to the arrax that will be sorted bx x
         std::vector<point2D>  xSortedPointsVectorForRight(ySortedPointsVectorForRight);
@@ -241,43 +221,46 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         
         
         //BOUNDS
-        xAndYBoundsForLeft = xAndYBounds;
-        xAndYBoundsRight = xAndYBounds;
         xAndYBoundsForLeft.y_upper = medianYValue;
         xAndYBoundsRight.y_lower = medianYValue;
-
-        VLeft = xSortedPointsVectorForLeft.size() != 0 ? kdtree_build_rec(ySortedPointsVectorForLeft,xSortedPointsVectorForLeft,xAndYBoundsForLeft,depth + 1) : NULL;
         
-        VRight = xSortedPointsVectorForRight.size() != 0 ? kdtree_build_rec(ySortedPointsVectorForRight,xSortedPointsVectorForRight,xAndYBoundsRight, depth + 1) : NULL;
-
-        
+        //Recursive Calls
+        VLeft = kdtree_build_rec(xSortedPointsVectorForLeft, ySortedPointsVectorForLeft,xAndYBoundsForLeft,depth + 1);
+        VRight = kdtree_build_rec(xSortedPointsVectorForRight, ySortedPointsVectorForRight,xAndYBoundsRight, depth + 1);
         
     }
     
     
+    
+    //Create a node for this median split
     treeNode* node = new treeNode();
     
+    //Determine type of point
     depth % 2 == 0 ? node->type = 'v' : node->type = 'h';
-
+    //Assign median point to node to be used as split info
     node->p = median;
-    
+    //Add the bouding box for this split
     node->nodeBounds = xAndYBounds;
     
-    VLeft != NULL ? node->left = VLeft->root : node->left  = NULL;
+    //Attach subtrees
+    node->left =  VLeft != NULL ? VLeft->root : NULL;
     
-    VLeft != NULL ? node->right = VRight->root : node->right  = NULL;
+    node->right = VLeft != NULL ? VRight->root :  NULL;
     
-    
+    //Create tree to be returned
     kdtree* tree = kdtree_init();
     
+    //Calculate the number of nodes in tree
     tree->count = (VLeft != NULL ? VLeft->count : 0 ) + (VRight != NULL ? VRight->count : 0 );
+    //Calculate the height of the tree
     tree->height = std::max((VLeft != NULL ? VLeft->height : 0 ), (VRight != NULL ? VRight->height : 0 )) + 1;
+    //Assign node as the root of the tree
     tree->root = node;
     return tree;
     
 }
 
-/* create a new tree representing the given array of points */
+/*Create a new tree representing the given array of points */
 kdtree* kdtree_build(std::vector<point2D> points) {
     // Create a vector sorted by x
     std::vector<point2D>  xSortedPointsVector(points);
@@ -293,6 +276,7 @@ kdtree* kdtree_build(std::vector<point2D> points) {
     boundingBox.x_upper = WINDOWSIZE;
     boundingBox.y_lower = 0;
     boundingBox.y_upper = WINDOWSIZE;
+    //Return Tree
     return kdtree_build_rec(xSortedPointsVector,ySortedPointsVector,boundingBox,1);
     
 }

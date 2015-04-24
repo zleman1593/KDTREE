@@ -1,8 +1,8 @@
 /*
  Base code From: Laura Toma, Rob Visentin
- Complete KD-Tree Algorithm and custom Drawing By Zackery Leman and Ivy Xing
+ Complete KD-Tree Algorithm and custom drawing By Zackery Leman and Ivy Xing
  
- What it does:
+ What it does (See Readme for more details):
  
  - generates a set of random points in 2D, builds a kd-tree on it and
  renders it in 2D with default orthogonal projection.
@@ -24,7 +24,6 @@
 #include <string>
 #include <sstream>
 #include <GLUT/glut.h>
-
 #include <OpenGL/OpenGL.h>
 #include <OpenGL/gl.h> // Header File For The OpenGL32 Library
 #include <OpenGL/glu.h> // Header File For The GLu32 Library
@@ -52,14 +51,14 @@ void keypress(unsigned char key, int x, int y);
 //Draw points or not
 bool drawPoints = false;
 
-//the array of n points
+//The array of n points
 int n;
 std::vector<point2D> points;
 
 //Initial random case
 int caseToUse = 0;
 
-// the kd-tree created with the points
+// The kd-tree created with the points
 kdtree *tree = NULL;
 
 
@@ -76,7 +75,8 @@ int remove_coincident_points() {
         
         // check if key is present
         if (duplicateMap.find(tempString) != duplicateMap.end()){
-            std::cout << "map already contains the point!\n";
+         //Map Already Contains Point
+           // std::cout << "map already contains the point!\n";
         } else{
             duplicateMap[tempString] = "";
             nonDuplicatedPoints.push_back(temp);
@@ -89,7 +89,7 @@ int remove_coincident_points() {
 }
 
 
-/* Initialize  the array of points stored in global variable points with random points */
+/* Initialize the vector of points stored in global variable points with random points */
 void initialize_points_random() {
     
     for (int i=0; i<n; i++) {
@@ -101,7 +101,7 @@ void initialize_points_random() {
     n = remove_coincident_points();
 }
 
-/* Initialize the array of points stored in global variable points with certain points for oth test case */
+/* Initialize the vector of points stored in global variable points with certain points for oth test case */
 void initialize_points_case0() {
     
     point2D pointA = point2D();
@@ -120,7 +120,7 @@ void initialize_points_case0() {
     n = remove_coincident_points();
 }
 
-/* Initialize the array of points stored in global variable points with certain points for first test case */
+/* Initialize the vector of points stored in global variable points with certain points for first test case */
 void initialize_points_case1() {
     
     point2D pointA = point2D();
@@ -143,7 +143,7 @@ void initialize_points_case1() {
 }
 
 
-/* initialize the array of points stored in global variable points with certain points for second test case */
+/* initialize the vector of points stored in global variable points with certain points for second test case */
 void initialize_points_case2() {
     
     point2D pointA = point2D();
@@ -165,7 +165,7 @@ void initialize_points_case2() {
     n = remove_coincident_points();
 }
 
-/* initialize the array of points stored in global variable points with certain points for third test case */
+/* initialize the vector of points stored in global variable points with certain points for third test case */
 void initialize_points_case3() {
     point2D pointA = point2D();
     pointA.x = 73;
@@ -213,7 +213,6 @@ void initialize_points_case4() {
 
 /* Print the array of points stored in global variable points*/
 void print_points() {
-    
     int i;
     printf("points: ");
     for (i=0; i<n; i++) {
@@ -227,7 +226,6 @@ void print_points() {
 void reset() {
     
     //re-initialize points
-    
     
     switch ( caseToUse )
     {
@@ -370,7 +368,6 @@ void fillRec(bounds nodeBounds){
             glColor3fv(white);
             break;
     }
-    
     
     glBegin(GL_POLYGON);
     glVertex2f(a.x, a.y);

@@ -242,7 +242,7 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
     //Attach subtrees
     node->left =  VLeft != NULL ? VLeft->root : NULL;
     
-    node->right = VLeft != NULL ? VRight->root :  NULL;
+    node->right = VRight != NULL ? VRight->root :  NULL;
     
     //Create tree to be returned
     kdtree* tree = kdtree_init();

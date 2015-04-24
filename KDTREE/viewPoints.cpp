@@ -49,6 +49,8 @@ GLfloat cyan[3] = {0.0, 1.0, 1.0};
 void display(void);
 void keypress(unsigned char key, int x, int y);
 
+//Draw points or not
+bool drawPoints = false;
 
 //the array of n points
 int n;
@@ -182,6 +184,29 @@ void initialize_points_case3() {
     n = remove_coincident_points();
 }
 
+/* initialize the array of points stored in global variable points with certain points for third test case */
+void initialize_points_case4() {
+
+    point2D pointA = point2D();
+    pointA.x = 302;
+    pointA.y = 41;
+    points.push_back(pointA);
+    point2D pointB = point2D();
+    pointB.x = 474;
+    pointB.y = 164;
+    points.push_back(pointB);
+    point2D pointC = point2D();
+    pointC.x = 460;
+    pointC.y = 178;
+    points.push_back(pointC);
+    point2D pointD = point2D();
+    pointD.x = 172;
+    pointD.y = 304;
+    points.push_back(pointD);
+    n = remove_coincident_points();
+}
+
+
 
 
 /* Print the array of points stored in global variable points*/
@@ -205,6 +230,7 @@ void reset() {
     //initialize_points_case1();
     //initialize_points_case2();
     //initialize_points_case3();
+    //initialize_points_case4();
     
     //free current tree
     if (tree) kdtree_free(tree);
@@ -421,7 +447,10 @@ void display(void) {
     draw_kdtree();
     
     //Draw points
-    draw_points();
+    if (drawPoints) {
+           draw_points();
+    }
+
     
     /* execute the drawing commands */
     glFlush();
@@ -438,7 +467,11 @@ void keypress(unsigned char key, int x, int y) {
             reset();
             glutPostRedisplay();
             break;
-            
+        case 'p':
+            drawPoints = drawPoints ? false : true;
+            reset();
+            glutPostRedisplay();
+            break;
         case 'q':
             exit(0);
             break;

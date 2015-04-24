@@ -89,7 +89,7 @@ void kdtree_print(kdtree *tree) {
 
 //private function to recursively free the subtree rooted at node
 static void treeNode_free(treeNode* node) {
-    //fill in
+
     
 }
 
@@ -131,6 +131,8 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
     bounds xAndYBoundsRight;//Top
     point2D median;
     
+    std::sort(xSortedPointsVector.begin(),xSortedPointsVector.end(),xCompare());
+    std::sort(ySortedPointsVector.begin(),ySortedPointsVector.end(),yCompare());
     
     //If are contains only one point
     if (xSortedPointsVector.size() == 1){

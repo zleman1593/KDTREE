@@ -17,12 +17,4 @@ typedef struct _lineSegment2D {
 } lineSegment2D;
 
 
-typedef struct _rect2D  {
-    point2D origin;
-    float width, height;
-} rect2D;
-
-
-//add any functions you might need to operate on these basic types
-
 #endif

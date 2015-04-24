@@ -10,12 +10,15 @@
 #include "geom.h"
 #include <stddef.h> //for size_t
 #include <vector>
+
 /* global variables */
 const int WINDOWSIZE = 500;
 const int POINT_SIZE  = 6.0f;
 
 typedef struct _treeNode treeNode;
 
+//Struct that holds the bounds that will allow
+//the lines to terminate at the correct locations
 typedef struct _bounds {
     int x_upper;
     int x_lower;
@@ -35,13 +38,10 @@ struct _treeNode {
 	     */
   char type; /* this can be 'h' (horizontal) or 'v' (vertical), or
 		'l' (leaf) depending whether the node splits with
-		a horizontal line or vertical line.  Technically
-		this should be an enum.
+		a horizontal line or vertical line.
 	     */
   treeNode  *left, *right; /* left/below and right/above children. */
   
-  /* we might need a parent pointer but we'll cross that bridge when
-     we get to it */
 };
 
 
@@ -52,13 +52,6 @@ typedef struct _kdtree {
 } kdtree;
 
 
-
-
-/* returns the root node of the given tree */
-treeNode* kdtree_getRoot(kdtree *tree);
-
-/* returns the point stored by the node */
-point2D treeNode_getPoint(treeNode *node);
 
 /* create a new empty tree */
 kdtree* kdtree_init();
@@ -74,6 +67,5 @@ void kdtree_free(kdtree *tree);
  nodes, and each node in an in-order traversal */
 void kdtree_print(kdtree *tree);
 
-kdtree* kdtree_build(std::vector<point2D> points);
 
 #endif

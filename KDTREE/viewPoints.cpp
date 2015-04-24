@@ -56,7 +56,7 @@ int n;
 std::vector<point2D> points;
 
 //Initial random case
-int caseToUse = 0;
+int caseToUse = 2;
 
 // The kd-tree created with the points
 kdtree *tree = NULL;
@@ -102,7 +102,7 @@ void initialize_points_random() {
 }
 
 /* Initialize the vector of points stored in global variable points with certain points for oth test case */
-void initialize_points_case0() {
+void initialize_points_case1() {
     
     point2D pointA = point2D();
     pointA.x = 100;
@@ -121,7 +121,7 @@ void initialize_points_case0() {
 }
 
 /* Initialize the vector of points stored in global variable points with certain points for first test case */
-void initialize_points_case1() {
+void initialize_points_case2() {
     
     point2D pointA = point2D();
     pointA.x = 370;
@@ -136,7 +136,7 @@ void initialize_points_case1() {
     pointC.y = 297;
     points.push_back(pointC);
     point2D pointD = point2D();
-    pointD.x = 444;
+    pointD.x = 370;
     pointD.y = 415;
     points.push_back(pointD);
     n = remove_coincident_points();
@@ -144,69 +144,43 @@ void initialize_points_case1() {
 
 
 /* initialize the vector of points stored in global variable points with certain points for second test case */
-void initialize_points_case2() {
+void initialize_points_case3() {
     
     point2D pointA = point2D();
     pointA.x = 73;
-    pointA.y = 370;
+    pointA.y = 200;
     points.push_back(pointA);
     point2D pointB = point2D();
-    pointB.x = 132;
-    pointB.y = 370;
+    pointB.x = 200;
+    pointB.y = 200;
     points.push_back(pointB);
     point2D pointC = point2D();
-    pointC.x = 297;
-    pointC.y = 370;
+    pointC.x = 200;
+    pointC.y = 20;
     points.push_back(pointC);
-    point2D pointD = point2D();
-    pointD.x = 415;
-    pointD.y = 444;
-    points.push_back(pointD);
+
     n = remove_coincident_points();
 }
 
 /* initialize the vector of points stored in global variable points with certain points for third test case */
-void initialize_points_case3() {
+void initialize_points_case4() {
     point2D pointA = point2D();
-    pointA.x = 73;
-    pointA.y = 370;
+    pointA.x = 3;
+    pointA.y = 5;
     points.push_back(pointA);
     point2D pointB = point2D();
-    pointB.x = 132;
+    pointB.x = 36;
     pointB.y = 370;
     points.push_back(pointB);
     point2D pointC = point2D();
-    pointC.x = 297;
-    pointC.y = 370;
+    pointC.x = 2;
+    pointC.y = 6;
     points.push_back(pointC);
-    point2D pointD = point2D();
-    pointD.x = 415;
-    pointD.y = 370;
-    points.push_back(pointD);
+
     n = remove_coincident_points();
 }
 
-/* initialize the array of points stored in global variable points with certain points for third test case */
-void initialize_points_case4() {
-    
-    point2D pointA = point2D();
-    pointA.x = 302;
-    pointA.y = 41;
-    points.push_back(pointA);
-    point2D pointB = point2D();
-    pointB.x = 474;
-    pointB.y = 164;
-    points.push_back(pointB);
-    point2D pointC = point2D();
-    pointC.x = 460;
-    pointC.y = 178;
-    points.push_back(pointC);
-    point2D pointD = point2D();
-    pointD.x = 172;
-    pointD.y = 304;
-    points.push_back(pointD);
-    n = remove_coincident_points();
-}
+
 
 
 
@@ -232,18 +206,15 @@ void reset() {
         case 0:
             initialize_points_random();
         case 1:
-            initialize_points_case0();
-            break;
-        case 2:
             initialize_points_case1();
             break;
-        case 3:
+        case 2:
             initialize_points_case2();
             break;
-        case 4:
+        case 3:
             initialize_points_case3();
             break;
-        case 5:
+        case 4:
             initialize_points_case4();
             break;
     }
@@ -480,6 +451,7 @@ void keypress(unsigned char key, int x, int y) {
     switch(key)
     {
         case ' ':
+            caseToUse = 0;
             reset();
             glutPostRedisplay();
             break;
@@ -487,28 +459,23 @@ void keypress(unsigned char key, int x, int y) {
             drawPoints = drawPoints ? false : true;
             glutPostRedisplay();
             break;
-        case '0':
+        case '1':
             caseToUse = 1;
             reset();
             glutPostRedisplay();
             break;
-        case '1':
+        case '2':
             caseToUse = 2;
             reset();
             glutPostRedisplay();
             break;
-        case '2':
+        case '3':
             caseToUse = 3;
             reset();
             glutPostRedisplay();
             break;
-        case '3':
-            caseToUse = 4;
-            reset();
-            glutPostRedisplay();
-            break;
         case '4':
-            caseToUse = 5;
+            caseToUse = 4;
             reset();
             glutPostRedisplay();
             break;

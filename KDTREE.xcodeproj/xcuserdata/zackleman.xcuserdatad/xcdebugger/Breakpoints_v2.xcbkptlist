@@ -118,15 +118,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
             landmarkName = "kdtree_build(std::vector&lt;point2D&gt; points)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
             landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
             landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
             landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
             landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
             landmarkName = "kdtree_build(std::vector&lt;point2D&gt; points)"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,7 +266,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KDTREE/kdtree.cpp"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "200"
@@ -282,7 +298,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "203"
@@ -298,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
             landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
             landmarkType = "7">
          </BreakpointContent>
@@ -314,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
             landmarkType = "7">
          </BreakpointContent>
@@ -330,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
             landmarkType = "7">
          </BreakpointContent>
@@ -346,27 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
             landmarkType = "7">
          </BreakpointContent>
@@ -383,7 +383,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "120"
             endingLineNumber = "120"
-            landmarkName = "initialize_points_case0()"
+            landmarkName = "initialize_points_case1()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -394,11 +394,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
             landmarkType = "7">
          </BreakpointContent>
@@ -410,11 +410,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
             landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
             landmarkType = "7">
          </BreakpointContent>
@@ -426,11 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
             landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
             landmarkType = "7">
          </BreakpointContent>
@@ -442,23 +442,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
-            landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "173"
@@ -474,11 +458,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KDTREE/kdtree.cpp"
-            timestampString = "451585838.898663"
+            timestampString = "451595550.294564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
+            landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KDTREE/kdtree.cpp"
+            timestampString = "451595550.294564"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KDTREE/viewPoints.cpp"
+            timestampString = "451595382.323643"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "initialize_points_case3()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KDTREE/kdtree.cpp"
+            timestampString = "451595567.526757"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "kdtree_build_rec(std::vector&lt;point2D&gt; xSortedPointsVector, std::vector&lt;point2D&gt; ySortedPointsVector,bounds xAndYBounds, int depth)"
             landmarkType = "7">
          </BreakpointContent>

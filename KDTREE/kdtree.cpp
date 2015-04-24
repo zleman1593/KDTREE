@@ -105,7 +105,6 @@ struct yCompare
 /* Recursively called method to create a new treefor the points */
 kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<point2D> ySortedPointsVector,bounds xAndYBounds, int depth){
     
-    
     //BASE CASE: If area contains no points return NULL to stop recursion
     if (xSortedPointsVector.size() == 0){
         return NULL;
@@ -113,10 +112,8 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
     
     kdtree* VLeft;//Left Subtree
     kdtree* VRight;//Right Subtree
-    bounds xAndYBoundsForLeft;//Bottom
-    bounds xAndYBoundsRight;//Top
-    xAndYBoundsForLeft = xAndYBounds;
-    xAndYBoundsRight = xAndYBounds;
+    bounds xAndYBoundsForLeft = xAndYBounds;//Bottom
+    bounds xAndYBoundsRight = xAndYBounds;//Top
     point2D median;//Median Point for the split
 
     int numberOfPoints = ySortedPointsVector.size();

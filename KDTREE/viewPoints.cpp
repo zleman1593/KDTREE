@@ -56,6 +56,8 @@ bool drawPoints = false;
 int n;
 std::vector<point2D> points;
 
+//Initial random case
+int caseToUse = 0;
 
 // the kd-tree created with the points
 kdtree *tree = NULL;
@@ -114,7 +116,7 @@ void initialize_points_case0() {
     pointC.x = 20;
     pointC.y = 400;
     points.push_back(pointC);
-
+    
     n = remove_coincident_points();
 }
 
@@ -143,7 +145,7 @@ void initialize_points_case1() {
 
 /* initialize the array of points stored in global variable points with certain points for second test case */
 void initialize_points_case2() {
- 
+    
     point2D pointA = point2D();
     pointA.x = 73;
     pointA.y = 370;
@@ -186,7 +188,7 @@ void initialize_points_case3() {
 
 /* initialize the array of points stored in global variable points with certain points for third test case */
 void initialize_points_case4() {
-
+    
     point2D pointA = point2D();
     pointA.x = 302;
     pointA.y = 41;
@@ -225,15 +227,33 @@ void print_points() {
 void reset() {
     
     //re-initialize points
-    initialize_points_random();
-    //initialize_points_case0();
-    //initialize_points_case1();
-    //initialize_points_case2();
-    //initialize_points_case3();
-    //initialize_points_case4();
+    
+    
+    switch ( caseToUse )
+    {
+        case 0:
+            initialize_points_random();
+        case 1:
+            initialize_points_case0();
+            break;
+        case 2:
+            initialize_points_case1();
+            break;
+        case 3:
+            initialize_points_case2();
+            break;
+        case 4:
+            initialize_points_case3();
+            break;
+        case 5:
+            initialize_points_case4();
+            break;
+    }
+    
     
     //free current tree
     if (tree) kdtree_free(tree);
+    //tree = NULL;
     
     //Build the tree
     Rtimer rt1;
@@ -312,11 +332,11 @@ void draw_line(lineSegment2D line){
 /* Draw the array of points stored in global variable points vector.*/
 void draw_points(){
     for (int i=0; i<n; i++) {
-            point2D point = points.at(i);
-            glColor3fv(green);
-            glBegin(GL_POINTS);
-            glVertex2f(point.x, point.y);
-            glEnd();
+        point2D point = points.at(i);
+        glColor3fv(green);
+        glBegin(GL_POINTS);
+        glVertex2f(point.x, point.y);
+        glEnd();
     }
     
 }
@@ -374,7 +394,7 @@ void draw_node(treeNode *node)
     point2D pointA = point2D();
     point2D pointB = point2D();
     
-
+    
     switch (node->type) {
         case 'h':
             //Draw line for node
@@ -402,7 +422,6 @@ void draw_node(treeNode *node)
         case 'l':
             //Fill rectangle for node
             fillRec( node->nodeBounds);
-            printf("Not Drawing Lef node: (p=(%d,%d))\n", node->p.x, node->p.y);
             break;
         default:
             printf("Improper tree node type\n");
@@ -448,9 +467,9 @@ void display(void) {
     
     //Draw points
     if (drawPoints) {
-           draw_points();
+        draw_points();
     }
-
+    
     
     /* execute the drawing commands */
     glFlush();
@@ -469,6 +488,31 @@ void keypress(unsigned char key, int x, int y) {
             break;
         case 'p':
             drawPoints = drawPoints ? false : true;
+            glutPostRedisplay();
+            break;
+        case '0':
+            caseToUse = 1;
+            reset();
+            glutPostRedisplay();
+            break;
+        case '1':
+            caseToUse = 2;
+            reset();
+            glutPostRedisplay();
+            break;
+        case '2':
+            caseToUse = 3;
+            reset();
+            glutPostRedisplay();
+            break;
+        case '3':
+            caseToUse = 4;
+            reset();
+            glutPostRedisplay();
+            break;
+        case '4':
+            caseToUse = 5;
+            reset();
             glutPostRedisplay();
             break;
         case 'q':

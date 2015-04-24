@@ -313,7 +313,7 @@ void draw_line(lineSegment2D line){
 void draw_points(){
     for (int i=0; i<n; i++) {
             point2D point = points.at(i);
-            glColor3fv(blue);
+            glColor3fv(green);
             glBegin(GL_POINTS);
             glVertex2f(point.x, point.y);
             glEnd();
@@ -469,7 +469,6 @@ void keypress(unsigned char key, int x, int y) {
             break;
         case 'p':
             drawPoints = drawPoints ? false : true;
-            reset();
             glutPostRedisplay();
             break;
         case 'q':

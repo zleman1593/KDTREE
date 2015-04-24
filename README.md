@@ -3,6 +3,7 @@ This program builds a kd-tree for a set of random points and uses the tree to dr
 
 Compile with command:
 make -f Makefile.txt
+
 Run with command ./viewPoints n
 where n is the number of points you want to 
 

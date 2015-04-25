@@ -56,7 +56,7 @@ int n;
 std::vector<point2D> points;
 
 //Initial random case
-int caseToUse = 2;
+int caseToUse = 0;
 
 // The kd-tree created with the points
 kdtree *tree = NULL;
@@ -182,6 +182,27 @@ void initialize_points_case4() {
 
 
 
+/* initialize the vector of points stored in global variable points with certain points for third test case */
+void initialize_points_case5() {
+    point2D pointA = point2D();
+    pointA.x = 50;
+    pointA.y = 232;
+    points.push_back(pointA);
+    point2D pointB = point2D();
+    pointB.x = 50;
+    pointB.y = 400;
+    points.push_back(pointB);
+    point2D pointC = point2D();
+    pointC.x = 68;
+    pointC.y = 232;
+    points.push_back(pointC);
+    
+    n = remove_coincident_points();
+
+}
+
+
+
 
 
 
@@ -205,6 +226,7 @@ void reset() {
     {
         case 0:
             initialize_points_random();
+            break;
         case 1:
             initialize_points_case1();
             break;

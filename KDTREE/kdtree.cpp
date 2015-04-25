@@ -153,6 +153,18 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         //Update Median so line will draw through proper point
         median = xSortedPointsVector.at(i);
         
+        
+        //Check if the case that causes infinite recursion is present
+        if (xSortedPointsVector.size() == 3 && xSortedPointsVector.at(0).x == xSortedPointsVector.at(1).x){
+            if (xSortedPointsVector.at(0).y == xSortedPointsVector.at(2).y || xSortedPointsVector.at(1).y == xSortedPointsVector.at(2).y ){
+                //Update Median so line will draw through proper point
+                median = xSortedPointsVector.at(2);
+                medianXValue = median.x;
+                i = 2;
+                
+            }
+        }
+        
         //Get all points in sorted order that are to the left . This includes the point along the median line.
         std::vector<point2D>  xSortedPointsVectorForLeft(xSortedPointsVector.begin(),xSortedPointsVector.begin() + i);
         //Copy all these points over to the array that will be sorted by y
@@ -199,6 +211,16 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         //Update Median so line will draw through proper point
         median = ySortedPointsVector.at(i);
         
+        //Check if the case that causes infinite recursion is present
+        if (ySortedPointsVector.size() == 3 && ySortedPointsVector.at(0).y == ySortedPointsVector.at(1).y){
+            if (ySortedPointsVector.at(0).x == ySortedPointsVector.at(2).x || ySortedPointsVector.at(1).x == ySortedPointsVector.at(2).x ){
+                //Update Median so line will draw through proper point
+                median = ySortedPointsVector.at(2);
+                i = 2;
+                medianYValue = median.y;
+                
+            }
+        }
         
         //Get all points in sorted order that are to the left . This includes the point along the median line.
         std::vector<point2D>  ySortedPointsVectorForLeft(ySortedPointsVector.begin(),ySortedPointsVector.begin() + i);
@@ -253,6 +275,9 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
     tree->height = std::max((VLeft != NULL ? VLeft->height : 0 ), (VRight != NULL ? VRight->height : 0 )) + 1;
     //Assign node as the root of the tree
     tree->root = node;
+    kdtree_free(VRight);
+    kdtree_free(VLeft);
+    
     return tree;
     
 }

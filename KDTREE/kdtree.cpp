@@ -103,7 +103,7 @@ struct yCompare
 
 
 /* Recursively called method to create a new treefor the points */
-kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<point2D> ySortedPointsVector,bounds xAndYBounds, int depth){
+kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<point2D> ySortedPointsVector,bounds xAndYBounds, int depth, point2D recursionLimit){
     
     //BASE CASE: If area contains no points return NULL to stop recursion
     if (xSortedPointsVector.size() == 0){
@@ -115,7 +115,7 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
     bounds xAndYBoundsForLeft = xAndYBounds;//Bottom
     bounds xAndYBoundsRight = xAndYBounds;//Top
     point2D median;//Median Point for the split
-
+    
     int numberOfPoints = ySortedPointsVector.size();
     int medianIndex = numberOfPoints/2;
     
@@ -153,17 +153,14 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         //Update Median so line will draw through proper point
         median = xSortedPointsVector.at(i);
         
+//        
+//        //Check if the case that causes infinite recursion is present
+//      
+//            //Update Median so line will draw through proper point
+//            median = xSortedPointsVector.at(2);
+//            medianXValue = median.x;
+//            i = 2;
         
-        //Check if the case that causes infinite recursion is present
-        if (xSortedPointsVector.size() == 3 && xSortedPointsVector.at(0).x == xSortedPointsVector.at(1).x){
-            if (xSortedPointsVector.at(0).y == xSortedPointsVector.at(2).y || xSortedPointsVector.at(1).y == xSortedPointsVector.at(2).y ){
-                //Update Median so line will draw through proper point
-                median = xSortedPointsVector.at(2);
-                medianXValue = median.x;
-                i = 2;
-                
-            }
-        }
         
         //Get all points in sorted order that are to the left . This includes the point along the median line.
         std::vector<point2D>  xSortedPointsVectorForLeft(xSortedPointsVector.begin(),xSortedPointsVector.begin() + i);
@@ -186,9 +183,22 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         xAndYBoundsForLeft.x_upper = medianXValue;
         xAndYBoundsRight.x_lower = medianXValue;
         
+       
+        //Indicate how many points are being passed to each side for recursion
+        point2D* limit = new point2D;
+        limit->x = xSortedPointsVectorForLeft.size();
+        limit->y = xSortedPointsVectorForRight.size();
+        
+         //Recursive Checks prevents infinite recursion when all points are in an L shape along those two intersecting lines
+        if (recursionLimit.x == 0 || recursionLimit.y == 0 ) {
+            if (recursionLimit.x == limit->x && recursionLimit.y == limit->y ) {
+                return NULL;
+            }
+        }
+        
         //Recursive Calls
-        VLeft =  kdtree_build_rec(xSortedPointsVectorForLeft,ySortedPointsVectorForLeft,xAndYBoundsForLeft,depth + 1);
-        VRight = kdtree_build_rec(xSortedPointsVectorForRight,ySortedPointsVectorForRight,xAndYBoundsRight, depth + 1);
+        VLeft =  kdtree_build_rec(xSortedPointsVectorForLeft,ySortedPointsVectorForLeft,xAndYBoundsForLeft,depth + 1, *limit);
+        VRight = kdtree_build_rec(xSortedPointsVectorForRight,ySortedPointsVectorForRight,xAndYBoundsRight, depth + 1, *limit);
         
         
     } else{
@@ -211,16 +221,13 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         //Update Median so line will draw through proper point
         median = ySortedPointsVector.at(i);
         
-        //Check if the case that causes infinite recursion is present
-        if (ySortedPointsVector.size() == 3 && ySortedPointsVector.at(0).y == ySortedPointsVector.at(1).y){
-            if (ySortedPointsVector.at(0).x == ySortedPointsVector.at(2).x || ySortedPointsVector.at(1).x == ySortedPointsVector.at(2).x ){
-                //Update Median so line will draw through proper point
-                median = ySortedPointsVector.at(2);
-                i = 2;
-                medianYValue = median.y;
-                
-            }
-        }
+//        //Check if the case that causes infinite recursion is present
+//      
+//            //Update Median so line will draw through proper point
+//            median = ySortedPointsVector.at(2);
+//            i = 2;
+//            medianYValue = median.y;
+//        }
         
         //Get all points in sorted order that are to the left . This includes the point along the median line.
         std::vector<point2D>  ySortedPointsVectorForLeft(ySortedPointsVector.begin(),ySortedPointsVector.begin() + i);
@@ -243,9 +250,22 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
         xAndYBoundsForLeft.y_upper = medianYValue;
         xAndYBoundsRight.y_lower = medianYValue;
         
+        
+        //Indicate how many points are being passed to each side for recursion
+        point2D* limit = new point2D;
+        limit->x = xSortedPointsVectorForLeft.size();
+        limit->y = xSortedPointsVectorForRight.size();
+        
+        //Recursive Checks prevents infinite recursion when all points are in an L shape along those two intersecting lines
+        if (recursionLimit.x == 0 || recursionLimit.y == 0 ) {
+            if (recursionLimit.x == limit->x && recursionLimit.y == limit->y ) {
+                return NULL;
+            }
+        }
+        
         //Recursive Calls
-        VLeft = kdtree_build_rec(xSortedPointsVectorForLeft, ySortedPointsVectorForLeft,xAndYBoundsForLeft,depth + 1);
-        VRight = kdtree_build_rec(xSortedPointsVectorForRight, ySortedPointsVectorForRight,xAndYBoundsRight, depth + 1);
+        VLeft = kdtree_build_rec(xSortedPointsVectorForLeft, ySortedPointsVectorForLeft,xAndYBoundsForLeft,depth + 1,*limit);
+        VRight = kdtree_build_rec(xSortedPointsVectorForRight, ySortedPointsVectorForRight,xAndYBoundsRight, depth + 1,*limit);
         
     }
     
@@ -298,11 +318,16 @@ kdtree* kdtree_build(std::vector<point2D> points) {
     boundingBox.x_upper = WINDOWSIZE;
     boundingBox.y_lower = 0;
     boundingBox.y_upper = WINDOWSIZE;
+    
+    //Prevents infinite recursion when all points are in an L shape along those two intersecting lines
+    //Reuse Point2D to hold the information needed to determine this. Not actually a point.
+    point2D* recursionLimit = new point2D;
+    recursionLimit->x = 1;
+    recursionLimit->y = 1;
+    
     //Return Tree
-    return kdtree_build_rec(xSortedPointsVector,ySortedPointsVector,boundingBox,1);
+    return kdtree_build_rec(xSortedPointsVector,ySortedPointsVector,boundingBox,1,*recursionLimit);
     
 }
-
-
 
 

@@ -10,6 +10,9 @@
 #include "geom.h"
 #include <stddef.h> //for size_t
 #include <vector>
+#include <map>
+#include <string>
+#include <sstream>
 
 /* global variables */
 const int WINDOWSIZE = 500;
@@ -66,6 +69,5 @@ void kdtree_free(kdtree *tree);
 /* print out information about the tree including height, number of
  nodes, and each node in an in-order traversal */
 void kdtree_print(kdtree *tree);
-
 
 #endif

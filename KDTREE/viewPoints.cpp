@@ -187,7 +187,7 @@ void initialize_points_case5() {
     point2D pointA = point2D();
     pointA.x = 50;
     pointA.y = 232;
-    points.push_back(pointA);
+  points.push_back(pointA);
     point2D pointB = point2D();
     pointB.x = 50;
     pointB.y = 400;
@@ -225,7 +225,8 @@ void reset() {
     switch ( caseToUse )
     {
         case 0:
-            initialize_points_random();
+         //   initialize_points_random();
+             initialize_points_case5();
             break;
         case 1:
             initialize_points_case1();

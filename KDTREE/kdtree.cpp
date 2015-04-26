@@ -101,10 +101,93 @@ struct yCompare
     }
 };
 
+//Returns Median point and gets VRight and VLeft
+point2D splitVertically(std::vector<point2D> xSortedPointsVector, std::vector<point2D> ySortedPointsVector,bounds xAndYBounds, point2D infiniteRecursionCheck, kdtree** VLeft, kdtree** VRight,int depth){
+    
+    //To prevent infinite recursion
+    point2D* limit = new point2D;
+    
+    bounds xAndYBoundsForLeft = xAndYBounds;//Bottom
+    bounds xAndYBoundsRight = xAndYBounds;//Top
+    
+    int numberOfPoints = xSortedPointsVector.size();
+    int medianIndex = numberOfPoints/2;
+    //Split By X
+    point2D median = xSortedPointsVector.at(medianIndex);//Median Point for the split
+    int medianXValue = median.x;
+    int i;
+    
+    //iterate over all values that have the same X coord
+    for (i = medianIndex; xSortedPointsVector.at(i).x == medianXValue; i--){
+        if (i == 0) {
+            i--;
+            break;
+        }
+    }
+    //Set pointer to the leftmost value that has the same x value as the median
+    //Because for loop will leave i at one position below coorect value
+    i = i + 1;
+    
+    //Update Median so line will draw through proper point
+    median = xSortedPointsVector.at(i);
+    
+    
+    do {
+        //Get all points in sorted order that are to the left . This includes the point along the median line.
+        std::vector<point2D>  xSortedPointsVectorForLeft(xSortedPointsVector.begin(),xSortedPointsVector.begin() + i);
+        //Copy all these points over to the array that will be sorted by y
+        std::vector<point2D>  ySortedPointsVectorForLeft(xSortedPointsVectorForLeft);
+        //Sort the y vector by y values
+        std::sort(ySortedPointsVectorForLeft.begin(),ySortedPointsVectorForLeft.end(),yCompare());
+        
+        
+        
+        //Get all points in sorted order that are to the right . This excludes the point along the median line.
+        std::vector<point2D>  xSortedPointsVectorForRight(xSortedPointsVector.begin() + i,xSortedPointsVector.end());
+        //Copy all these points over to the vector that will be sorted by y
+        std::vector<point2D>  ySortedPointsVectorForRight(xSortedPointsVectorForRight);
+        //Sort the y vector by y values
+        std::sort(ySortedPointsVectorForRight.begin(),ySortedPointsVectorForRight.end(),yCompare());
+        
+        
+        //BOUNDS
+        xAndYBoundsForLeft.x_upper = medianXValue;
+        xAndYBoundsRight.x_lower = medianXValue;
+        
+        
+        
+        //Indicate how many points are being passed to each side for recursion
+        limit->x = xSortedPointsVectorForLeft.size();
+        limit->y = xSortedPointsVectorForRight.size();
+        
+        if (!(infiniteRecursionCheck.x == limit->x && infiniteRecursionCheck.y == limit->y) ) {
+            //Recursive Calls
+            *VLeft =  kdtree_build_rec(xSortedPointsVectorForLeft,ySortedPointsVectorForLeft,xAndYBoundsForLeft,depth + 1, *limit);
+            *VRight = kdtree_build_rec(xSortedPointsVectorForRight,ySortedPointsVectorForRight,xAndYBoundsRight, depth + 1, *limit);
+        }else{
+            //Prepare for second pass through while loop
+            //Update Median so line will draw through proper point
+            int index;
+            for (index = 0; xSortedPointsVector.at(index).x <= xSortedPointsVector.at(0).x; index++) {
+                
+            }
+            median = xSortedPointsVector.at(index);
+            i = index;
+            medianXValue = median.x;
+            
+            
+        }
+        
+    } while(infiniteRecursionCheck.x == limit->x && infiniteRecursionCheck.y == limit->y);
+    //Recursive Checks prevents infinite recursion when all points are in an L shape along those two intersecting lines
+    
+    return median;
+    
+}
 
 
 point2D split(std::vector<point2D> xSortedPointsVector, std::vector<point2D> ySortedPointsVector,bounds xAndYBounds, point2D infiniteRecursionCheck, kdtree** VLeft, kdtree** VRight,int depth, bool vertLine){
-    std::vector<point2D>  ySortedPointsVectorForLeft;
+  
     //To prevent infinite recursion
     point2D* recursionCheck = new point2D;
     
@@ -134,7 +217,7 @@ point2D split(std::vector<point2D> xSortedPointsVector, std::vector<point2D> ySo
     
     
     //Update Median so line will draw through proper point
-    median = vertLine ? xSortedPointsVector.at(medianIndex): ySortedPointsVector.at(medianIndex);//Median Point for the split
+    median = vertLine ? xSortedPointsVector.at(i) : ySortedPointsVector.at(i);//Median Point for the split
     
     do {
         std::vector<point2D>  ySortedPointsVectorForLeft;
@@ -233,7 +316,7 @@ point2D split(std::vector<point2D> xSortedPointsVector, std::vector<point2D> ySo
                 for (index = 0;  ySortedPointsVector.at(index).y <= ySortedPointsVector.at(0).y; index++) {}
             }
             
-            median = vertLine ? xSortedPointsVector.at(medianIndex): ySortedPointsVector.at(medianIndex);
+            median = vertLine ? xSortedPointsVector.at(index): ySortedPointsVector.at(index);
             i = index;
           
             medianCoordValue = vertLine ? median.x : median.y;
@@ -280,7 +363,9 @@ kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<p
     } else if (depth % 2 == 0){
         //Returns Median point and gets VRight and VLeft
         //splitWithVerticalLine
-        median = split(xSortedPointsVector, ySortedPointsVector, xAndYBounds, infiniteRecursionCheck, &VLeft, &VRight,depth,false);
+        median = split(xSortedPointsVector, ySortedPointsVector, xAndYBounds, infiniteRecursionCheck, &VLeft, &VRight,depth,true);
+        
+        
         
     } else{
         //Returns Median point and gets VRight and VLeft

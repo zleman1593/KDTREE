@@ -193,13 +193,9 @@ void initialize_points_case5() {
     pointB.y = 400;
     points.push_back(pointB);
     point2D pointC = point2D();
-    pointC.x = 50;
-    pointC.y = 100;
+    pointC.x = 68;
+    pointC.y = 232;
     points.push_back(pointC);
-    point2D pointD = point2D();
-    pointD.x = 50;
-    pointD.y = 50;
-    points.push_back(pointD);
     
     n = remove_coincident_points();
 
@@ -229,8 +225,7 @@ void reset() {
     switch ( caseToUse )
     {
         case 0:
-         //   initialize_points_random();
-             initialize_points_case5();
+            initialize_points_random();
             break;
         case 1:
             initialize_points_case1();

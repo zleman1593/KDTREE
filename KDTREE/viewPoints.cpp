@@ -193,9 +193,13 @@ void initialize_points_case5() {
     pointB.y = 400;
     points.push_back(pointB);
     point2D pointC = point2D();
-    pointC.x = 68;
-    pointC.y = 232;
+    pointC.x = 50;
+    pointC.y = 100;
     points.push_back(pointC);
+    point2D pointD = point2D();
+    pointD.x = 50;
+    pointD.y = 50;
+    points.push_back(pointD);
     
     n = remove_coincident_points();
 

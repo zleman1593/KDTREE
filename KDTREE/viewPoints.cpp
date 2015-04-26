@@ -225,8 +225,13 @@ void reset() {
     switch ( caseToUse )
     {
         case 0:
+<<<<<<< HEAD
            // initialize_points_random();
                    initialize_points_case5();
+=======
+            //initialize_points_case5();
+            initialize_points_random();
+>>>>>>> test-merge-branch
             break;
         case 1:
             initialize_points_case1();

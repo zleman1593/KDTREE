@@ -75,8 +75,8 @@ int remove_coincident_points() {
         
         // check if key is present
         if (duplicateMap.find(tempString) != duplicateMap.end()){
-         //Map Already Contains Point
-           // std::cout << "map already contains the point!\n";
+            //Map Already Contains Point
+            // std::cout << "map already contains the point!\n";
         } else{
             duplicateMap[tempString] = "";
             nonDuplicatedPoints.push_back(temp);
@@ -158,7 +158,7 @@ void initialize_points_case3() {
     pointC.x = 200;
     pointC.y = 20;
     points.push_back(pointC);
-
+    
     n = remove_coincident_points();
 }
 
@@ -176,7 +176,7 @@ void initialize_points_case4() {
     pointC.x = 2;
     pointC.y = 6;
     points.push_back(pointC);
-
+    
     n = remove_coincident_points();
 }
 
@@ -187,7 +187,7 @@ void initialize_points_case5() {
     point2D pointA = point2D();
     pointA.x = 50;
     pointA.y = 232;
-  points.push_back(pointA);
+    points.push_back(pointA);
     point2D pointB = point2D();
     pointB.x = 50;
     pointB.y = 400;
@@ -198,7 +198,7 @@ void initialize_points_case5() {
     points.push_back(pointC);
     
     n = remove_coincident_points();
-
+    
 }
 
 
@@ -221,17 +221,12 @@ void print_points() {
 void reset() {
     
     //re-initialize points
+    points.clear();
     
     switch ( caseToUse )
     {
         case 0:
-<<<<<<< HEAD
-           // initialize_points_random();
-                   initialize_points_case5();
-=======
-            //initialize_points_case5();
             initialize_points_random();
->>>>>>> test-merge-branch
             break;
         case 1:
             initialize_points_case1();

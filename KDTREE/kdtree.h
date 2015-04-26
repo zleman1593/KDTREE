@@ -65,8 +65,7 @@ kdtree* kdtree_build(std::vector<point2D> points);
 //Main recursive method
 kdtree* kdtree_build_rec(std::vector<point2D> xSortedPointsVector, std::vector<point2D> ySortedPointsVector,bounds xAndYBounds, int depth, point2D recursionLimit);
 
-/* free all memory allocated for the tree, including the tree
-   itself */
+/* Free memory for the tree itself and resets tree */
 void kdtree_free(kdtree *tree);
 
 /* print out information about the tree including height, number of
